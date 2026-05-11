@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML 难以置信的奇效 — 中文翻译 · 20 个示例</title>
+<style>
+  :root {
+    --ivory:  #FAF9F5;
+    --paper:  #FFFFFF;
+    --slate:  #141413;
+    --clay:   #D97757;
+    --clay-d: #B85C3E;
+    --oat:    #E3DACC;
+    --olive:  #788C5D;
+    --g100:   #F0EEE6;
+    --g200:   #E6E3DA;
+    --g300:   #D1CFC5;
+    --g500:   #87867F;
+    --g700:   #3D3D3A;
+    --serif: ui-serif, Georgia, "Times New Roman", Times, serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ivory);
+    color: var(--slate);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px 140px; }
+  header.masthead {
+    padding: 80px 0 56px;
+    border-bottom: 1.5px solid var(--g300);
+    margin-bottom: 12px;
+    position: relative;
+    overflow: visible;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--g500);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 24px; height: 1.5px;
+    background: var(--clay);
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(38px, 5.4vw, 62px);
+    line-height: 1.06;
+    letter-spacing: -0.018em;
+    margin: 0 0 8px;
+    max-width: 17ch;
+  }
+  h1 em { font-style: italic; color: var(--clay); }
+  .intro {
+    font-size: 16.5px;
+    color: var(--g700);
+    margin: 22px 0 0;
+    max-width: 620px;
+  }
+  .intro a { color: var(--clay); text-decoration-color: var(--oat); text-underline-offset: 3px; }
+  .intro a:hover { text-decoration-color: var(--clay); }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 48px;
+    align-items: end;
+  }
+  @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; } }
+  .hero-fig {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    align-items: end;
+  }
+  @media (max-width: 880px) { .hero-fig { max-width: 400px; margin-top: 28px; } }
+  .hero-fig .pane {
+    border-radius: 10px;
+    border: 1.5px solid var(--g300);
+    background: var(--paper);
+    padding: 14px;
+    aspect-ratio: 4/5;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    position: relative;
+  }
+  .hero-fig .pane.md {
+    background: var(--g100);
+    transform: rotate(-2.5deg) translateY(6px);
+  }
+  .hero-fig .pane.html {
+    transform: rotate(1.5deg);
+    border-color: var(--slate);
+    box-shadow: 0 12px 32px rgba(20,20,19,.10);
+  }
+  .hero-fig .tag {
+    position: absolute;
+    top: -10px; left: 12px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--ivory);
+    padding: 2px 7px;
+    border: 1.5px solid var(--g300);
+    border-radius: 6px;
+    color: var(--g500);
+  }
+  .hero-fig .pane.html .tag { border-color: var(--slate); color: var(--slate); }
+  .hero-fig .l { height: 6px; border-radius: 3px; background: var(--g300); }
+  .hero-fig .l.w90 { width: 90%; } .hero-fig .l.w75 { width: 75%; }
+  .hero-fig .l.w60 { width: 60%; } .hero-fig .l.w82 { width: 82%; }
+  .hero-fig .l.w70 { width: 70%; } .hero-fig .l.w50 { width: 50%; }
+  .hero-fig .pane.html .l { background: var(--g200); }
+  .hero-fig .pane.html .blk {
+    border-radius: 5px;
+    flex: 1;
+    background: linear-gradient(135deg, var(--oat), #ECE1CF);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-fig .pane.html .blk::after {
+    content: "";
+    position: absolute;
+    left: 18%; right: 18%; top: 28%;
+    height: 40%;
+    border: 2px solid var(--clay);
+    border-radius: 50%;
+    opacity: .7;
+  }
+  .hero-fig .pane.html .row { display: flex; gap: 6px; align-items: flex-end; }
+  .hero-fig .pane.html .bar { flex: 1; border-radius: 3px 3px 0 0; }
+  .hero-fig .pane.html .bar.b1 { height: 14px; background: var(--olive); }
+  .hero-fig .pane.html .bar.b2 { height: 26px; background: var(--clay); }
+  .hero-fig .pane.html .bar.b3 { height: 18px; background: var(--oat); }
+  .hero-fig .pane.html .bar.b4 { height: 30px; background: var(--slate); }
+  nav.toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 26px 0 0;
+  }
+  nav.toc a {
+    font-size: 12.5px;
+    padding: 7px 14px;
+    border: 1.5px solid var(--g300);
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--g700);
+    background: var(--paper);
+    transition: border-color 120ms, color 120ms, background 120ms;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  nav.toc a .n {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--g500);
+  }
+  nav.toc a:hover { border-color: var(--slate); color: var(--slate); }
+  nav.toc a:hover .n { color: var(--clay); }
+  section { margin-top: 72px; scroll-margin-top: 28px; }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 10px;
+  }
+  .sec-head .idx {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--clay);
+    font-weight: 600;
+    width: 34px;
+    flex-shrink: 0;
+  }
+  .sec-head h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 27px;
+    margin: 0;
+    letter-spacing: -0.012em;
+  }
+  .sec-head .count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--g500);
+    background: var(--g100);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+  .sec-intro {
+    font-size: 14.5px;
+    color: var(--g700);
+    max-width: 700px;
+    margin: 0 0 24px 50px;
+  }
+  @media (max-width: 640px) { .sec-intro { margin-left: 0; } }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(316px, 1fr));
+    gap: 20px;
+    margin-left: 50px;
+  }
+  @media (max-width: 640px) { .grid { margin-left: 0; } }
+  a.card {
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    border: 1.5px solid var(--g300);
+    border-radius: 14px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  a.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(20, 20, 19, 0.10);
+    border-color: var(--slate);
+  }
+  .thumb {
+    height: 132px;
+    background: var(--g100);
+    border-bottom: 1.5px solid var(--g200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    transition: background 150ms ease;
+  }
+  a.card:hover .thumb { background: var(--oat); }
+  .thumb svg { width: 100%; height: 100%; overflow: visible; }
+  .thumb svg .st { stroke: var(--g500); fill: none; stroke-width: 2.5; }
+  .thumb svg .fl { fill: var(--g300); }
+  .thumb svg .cl { fill: var(--clay); }
+  .thumb svg .ol { fill: var(--olive); }
+  .thumb svg .oa { fill: var(--oat); stroke: var(--g500); stroke-width: 2.5; }
+  .thumb svg .sl { fill: var(--slate); }
+  .thumb svg .wh { fill: var(--paper); stroke: var(--g500); stroke-width: 2.5; }
+  .thumb svg .ln { stroke: var(--g500); stroke-width: 2.5; fill: none; stroke-linecap: round; }
+  .thumb svg .lc { stroke: var(--clay); stroke-width: 2.5; fill: none; stroke-linecap: round; }
+  .thumb svg .da { stroke-dasharray: 4 4; }
+  a.card:hover .thumb svg .fl { fill: var(--g500); }
+  a.card:hover .thumb svg .oa { fill: var(--paper); }
+  .body { padding: 18px 20px 16px; display: flex; flex-direction: column; flex: 1; }
+  .title {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.22;
+    color: var(--slate);
+    margin-bottom: 7px;
+    letter-spacing: -0.008em;
+  }
+  .desc {
+    font-size: 13.5px;
+    color: var(--g700);
+    line-height: 1.5;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  .file {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--g500);
+    border-top: 1px solid var(--g100);
+    padding-top: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .file .arrow { transition: transform 150ms ease; color: var(--g300); }
+  a.card:hover .file { color: var(--clay); }
+  a.card:hover .file .arrow { transform: translateX(3px); color: var(--clay); }
+  .detail-panel {
+    display: none;
+    background: var(--paper);
+    border: 1.5px solid var(--slate);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin: 16px 0 0 50px;
+    box-shadow: 0 12px 40px rgba(20,20,19,0.12);
+  }
+  .detail-panel.open { display: block; }
+  @media (max-width: 640px) { .detail-panel { margin-left: 0; } }
+  .detail-panel h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0 0 16px;
+  }
+  .detail-panel h4 {
+    font-family: var(--sans);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--g500);
+    margin: 20px 0 8px;
+  }
+  .detail-panel p { font-size: 14.5px; color: var(--g700); margin: 0 0 12px; }
+  .detail-panel ul { margin: 8px 0 16px; padding-left: 20px; }
+  .detail-panel li { font-size: 14px; color: var(--g700); margin-bottom: 6px; }
+  .detail-panel .prompt {
+    background: var(--g100);
+    border: 1.5px solid var(--g300);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: var(--g700);
+    margin: 12px 0;
+    line-height: 1.6;
+  }
+  .detail-panel .prompt .label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--g500);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .detail-panel .close-btn {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--g500);
+    border: 1.5px solid var(--g300);
+    border-radius: 8px;
+    padding: 6px 14px;
+    cursor: pointer;
+    background: var(--ivory);
+    transition: border-color 120ms;
+  }
+  .detail-panel .close-btn:hover { border-color: var(--slate); color: var(--slate); }
+  .detail-panel .orig-link {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--clay);
+    text-decoration: none;
+    border-bottom: 1px dotted transparent;
+    margin-left: 12px;
+  }
+  .detail-panel .orig-link:hover { border-bottom-color: var(--clay); }
+  footer {
+    margin-top: 100px;
+    border-top: 1.5px solid var(--g300);
+    padding-top: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--g500);
+  }
+  footer .k { font-family: var(--serif); font-style: italic; color: var(--g700); font-size: 15px; }
+  footer a { color: var(--clay); text-decoration-color: var(--oat); text-underline-offset: 3px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">博客文章配套示例页</div>
+        <h1>HTML 难以置信的<em>奇效</em></h1>
+        <p class="intro">
+          Agent 生成的 <code>.html</code> 文件 —— 20 个自包含示例，替代了原本会是一堵文字墙的 Markdown。
+          每一个都用一份你<em>愿意去读</em>的文档替换了你只会扫一眼的东西 —— 直接在任何浏览器中打开。
+          按它们替代的工作类型分组列出。
+        </p>
+        <nav class="toc">
+          <a href="#exploration">探索与规划 <span class="n">3</span></a>
+          <a href="#code-review">代码审查 <span class="n">3</span></a>
+          <a href="#design">设计 <span class="n">2</span></a>
+          <a href="#prototyping">原型 <span class="n">2</span></a>
+          <a href="#illustrations">图表 <span class="n">2</span></a>
+          <a href="#decks">幻灯片 <span class="n">1</span></a>
+          <a href="#research">调研 <span class="n">2</span></a>
+          <a href="#reports">报告 <span class="n">2</span></a>
+          <a href="#editors">自定义编辑器 <span class="n">3</span></a>
+        </nav>
+      </div>
+      <div class="hero-fig" aria-hidden="true">
+        <div class="pane md">
+          <span class="tag">.md</span>
+          <span class="l w90"></span><span class="l w75"></span><span class="l w82"></span>
+          <span class="l w60"></span><span class="l w90"></span><span class="l w70"></span>
+          <span class="l w82"></span><span class="l w50"></span><span class="l w75"></span>
+          <span class="l w90"></span><span class="l w60"></span>
+        </div>
+        <div class="pane html">
+          <span class="tag">.html</span>
+          <span class="l w60"></span>
+          <span class="blk"></span>
+          <span class="row"><span class="bar b1"></span><span class="bar b2"></span><span class="bar b3"></span><span class="bar b4"></span></span>
+          <span class="l w75"></span><span class="l w50"></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================== 探索与规划 ========================== -->
+  <section id="exploration">
+    <div class="sec-head"><span class="idx">01</span><h2>探索与规划</h2><span class="count">3 个示例</span></div>
+    <p class="sec-intro">
+      当你还不确定自己想要什么的时候。让 Agent 向多个方向展开探索，把它们并排展示出来，
+      让你可以指向其中一个——而不是依次阅读三堵文字墙并试图全记在脑子里。
+      选定方向后，把选择变成实施者能真正阅读的计划。
+    </p>
+    <div class="grid">
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d01')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="wh" x="4" y="10" width="32" height="60" rx="5"/>
+          <rect class="wh" x="44" y="10" width="32" height="60" rx="5"/>
+          <rect class="oa" x="84" y="10" width="32" height="60" rx="5"/>
+          <line class="ln" x1="10" y1="26" x2="30" y2="26"/><line class="ln" x1="10" y1="36" x2="26" y2="36"/>
+          <line class="ln" x1="50" y1="26" x2="70" y2="26"/><line class="ln" x1="50" y1="36" x2="66" y2="36"/>
+          <line class="lc" x1="90" y1="26" x2="110" y2="26"/><line class="lc" x1="90" y1="36" x2="106" y2="36"/>
+          <circle class="cl" cx="100" cy="56" r="6"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">三种代码实现方式</div>
+          <div class="desc">三种解决同一问题的方案并排对比，每种方案的取舍一目了然。</div>
+          <div class="file"><span>01-代码方案探索.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d01"><div>
+        <h3>三种代码实现方式</h3>
+        <p>探索 React 代码库中任务筛选输入框的三种防抖搜索实现方案，并列对比每种方案的取舍。</p>
+        <div class="prompt"><span class="label">提示词</span>展示三种不同的防抖搜索实现方式，用于我们 React 代码库中的任务筛选输入框，并列出每种方案的利弊。</div>
+        <p>三种方案：1) 内联 useEffect + setTimeout、2) 自定义 useDebounce 钩子、3) 小型第三方库。包含代码面板、Pro/Con 表格和最终推荐。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/01-exploration-code-approaches.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d01')">收起</span>
+      </div></div>
+
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d02')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="wh" x="6" y="8" width="50" height="30" rx="4"/>
+          <rect class="oa" x="64" y="8" width="50" height="30" rx="4"/>
+          <rect class="oa" x="6" y="44" width="50" height="30" rx="4"/>
+          <rect class="wh" x="64" y="44" width="50" height="30" rx="4"/>
+          <circle class="cl" cx="18" cy="20" r="5"/><rect class="fl" x="28" y="16" width="22" height="4" rx="2"/>
+          <rect class="ol" x="72" y="16" width="34" height="6" rx="3"/>
+          <rect class="sl" x="14" y="54" width="34" height="6" rx="3"/>
+          <circle class="ol" cx="102" cy="58" r="6"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">视觉设计方案探索</div>
+          <div class="desc">多种布局和调色方案实时渲染，让你可以真切感受，而非凭空想象。</div>
+          <div class="file"><span>02-视觉设计方案.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d02"><div>
+        <h3>四种视觉设计方案</h3>
+        <p>为"暂无任务"状态探索四种视觉方向——极简、插画、趣味、引导，支持浅色/深色背景切换。</p>
+        <div class="prompt"><span class="label">提示词</span>为空状态组件探索四种视觉方向。每种都实时渲染，以便我们对比基调、密度和在浅色/深色背景上的表现。</div>
+        <p>A) 极简——纯排版，单操作；B) 插画——几何图形解释对象模型；C) 趣味——轻柔弹跳动画增加活力；D) 引导式——当作新手引导，密度更高但每条都可操作。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/02-exploration-visual-designs.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d02')">收起</span>
+      </div></div>
+
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d16')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <line class="ln" x1="14" y1="12" x2="14" y2="68"/>
+          <circle class="cl" cx="14" cy="16" r="5"/><circle class="ol" cx="14" cy="40" r="5"/><circle class="fl" cx="14" cy="64" r="5"/>
+          <rect class="fl" x="28" y="12" width="48" height="4" rx="2"/><rect class="fl" x="28" y="21" width="34" height="4" rx="2"/>
+          <rect class="fl" x="28" y="36" width="42" height="4" rx="2"/><rect class="fl" x="28" y="45" width="28" height="4" rx="2"/>
+          <rect class="fl" x="28" y="60" width="44" height="4" rx="2"/>
+          <rect class="oa" x="86" y="12" width="28" height="24" rx="4"/>
+          <rect class="wh" x="86" y="44" width="28" height="24" rx="4"/>
+          <line class="lc" x1="92" y1="56" x2="108" y2="56"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">实施计划</div>
+          <div class="desc">时间线上的里程碑、数据流图、内嵌模拟图、风险代码和风险表格——可以直接交付的计划。</div>
+          <div class="file"><span>16-实施计划.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d16"><div>
+        <h3>实施计划：任务卡片的评论线程</h3>
+        <p>为给任务卡片添加线程化评论功能创建完整的实施计划，包括模拟图、数据流、关键代码和风险表。</p>
+        <div class="prompt"><span class="label">提示词</span>为给任务卡片添加线程化评论创建一个全面的实施计划。包含模拟图、从客户端到持久层的数据流、需要编写的关键代码，以及风险表。让它便于在手机上浏览。</div>
+        <p>涵盖：6 个里程碑（2 周工期）、客户端→API→DB 数据流图、任务卡片内联线程模拟图、关键代码片段（迁移脚本 + React Query 乐观更新）、风险评估表和遗留问题。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/16-implementation-plan.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d16')">收起</span>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ========================== 代码审查与理解 ========================== -->
+  <section id="code-review">
+    <div class="sec-head"><span class="idx">02</span><h2>代码审查与理解</h2><span class="count">3 个示例</span></div>
+    <p class="sec-intro">
+      差异对比和调用图是空间信息；Markdown 把它们压扁了。让 Agent 把变更渲染为带标注的差异对比图，
+      把模块画成方框和箭头，或者写出审查者真正想要的 PR 描述——让代码的结构一目了然。
+    </p>
+    <div class="grid">
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d03')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="wh" x="6" y="8" width="72" height="64" rx="5"/>
+          <line class="ln" x1="14" y1="20" x2="66" y2="20"/>
+          <rect class="ol" x="14" y="28" width="56" height="7" rx="2" opacity=".5"/>
+          <rect class="cl" x="14" y="38" width="48" height="7" rx="2" opacity=".5"/>
+          <line class="ln" x1="14" y1="52" x2="58" y2="52"/><line class="ln" x1="14" y1="62" x2="50" y2="62"/>
+          <rect class="oa" x="86" y="22" width="28" height="20" rx="4"/>
+          <line class="lc da" x1="78" y1="32" x2="86" y2="32"/>
+          <circle class="cl" cx="100" cy="58" r="7"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">带注释的 PR 审查</div>
+          <div class="desc">差异渲染带边距注释、严重性标签和跳转链接——比滚动终端更易浏览。</div>
+          <div class="file"><span>03-PR审查摘要.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d03"><div>
+        <h3>PR #247 — 审查摘要</h3>
+        <p>为任务列表变更添加乐观更新的 PR 审查页面，包含风险地图、带注释的差异对比和审查评论气泡。</p>
+        <div class="prompt"><span class="label">提示词</span>帮我审查这个 PR，创建一个描述它的 HTML 文件。我对 streaming/backpressure 逻辑不太熟悉，所以重点分析那部分。渲染实际的差异对比，在边距中加上行内注释，按严重程度用颜色编码。</div>
+        <p>包含：风险地图（注意力/值得看/安全三级）、6 个文件的差异对比（带行内审查评论）、阻塞性问题气泡标注和下一步建议清单。颜色编码：红色=阻塞、黄色=值得看、绿色=安全。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/03-code-review-pr.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d03')">收起</span>
+      </div></div>
+
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d17')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="oa" x="6" y="8" width="48" height="28" rx="4"/>
+          <rect class="wh" x="6" y="44" width="48" height="28" rx="4"/>
+          <line class="ln" x1="14" y1="20" x2="46" y2="20"/><line class="ln" x1="14" y1="28" x2="38" y2="28"/>
+          <line class="lc" x1="14" y1="56" x2="46" y2="56"/><line class="ln" x1="14" y1="64" x2="38" y2="64"/>
+          <rect class="wh" x="64" y="8" width="50" height="64" rx="5"/>
+          <circle class="cl" cx="74" cy="22" r="5"/><rect class="fl" x="84" y="19" width="24" height="5" rx="2"/>
+          <circle class="ol" cx="74" cy="42" r="5"/><rect class="fl" x="84" y="39" width="22" height="5" rx="2"/>
+          <circle class="fl" cx="74" cy="62" r="5"/><rect class="fl" x="84" y="59" width="26" height="5" rx="2"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">给审查者的 PR 说明</div>
+          <div class="desc">作者视角：动机、变更前后对比、逐文件遍历附 <em>为什么</em>，以及审查重点。</div>
+          <div class="file"><span>17-PR说明.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d17"><div>
+        <h3>PR #312 — 将通知投递迁移到队列</h3>
+        <p>将内联通知发送改造为基于 pg-boss 队列的异步投递，含逐文件说明、测试计划和分阶段发布策略。</p>
+        <div class="prompt"><span class="label">提示词</span>为我的审查者写一份 PR #312 说明。解释动机，逐文件带他们了解变更及每个文件的<em>为什么</em>，展示前后行为对比，并明确指出审查重点。</div>
+        <p>包含：TL;DR、前后对比（p99 从 1.4s 降至 180ms）、6 个文件逐一遍览（含代码）、3 个审查重点、4 项测试计划和分阶段发布（内部→10%→100%）。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/17-pr-writeup.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d17')">收起</span>
+      </div></div>
+
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d04')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="wh" x="44" y="8" width="32" height="20" rx="4"/>
+          <rect class="oa" x="8" y="52" width="32" height="20" rx="4"/>
+          <rect class="cl" x="44" y="52" width="32" height="20" rx="4"/>
+          <rect class="wh" x="80" y="52" width="32" height="20" rx="4"/>
+          <line class="ln" x1="50" y1="28" x2="26" y2="52"/>
+          <line class="lc" x1="60" y1="28" x2="60" y2="52"/>
+          <line class="ln" x1="70" y1="28" x2="94" y2="52"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">模块架构图</div>
+          <div class="desc">一个不熟悉的包被画成方框和箭头，热路径被高亮，入口点被列出。</div>
+          <div class="file"><span>04-模块架构图.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d04"><div>
+        <h3>认证流程：代码库中的完整路径</h3>
+        <p>Birchline 使用基于 Cookie 的会话，从浏览器到数据库的完整认证路径拆解，配有架构图、调用栈讲解、关键文件列表和注意事项。</p>
+        <p>涵盖 5 个步骤：AuthProvider→会话路由→verifyToken 中间件（信任边界）→SessionStore（LRU+Postgres）→数据库迁移脚本。边栏列出 6 个关键文件和 2 个注意事项。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/04-code-understanding.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d04')">收起</span>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ========================== 设计 ========================== -->
+  <section id="design">
+    <div class="sec-head"><span class="idx">03</span><h2>设计</h2><span class="count">2 个示例</span></div>
+    <p class="sec-intro">
+      HTML <em>就是</em>你的设计系统交付的媒介，所以它也是讨论设计的天然格式。
+      Token 变成色卡，组件变成一览表，生成的产物可以直接喂回下一个提示词。
+    </p>
+    <div class="grid">
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d05')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="cl" x="8" y="10" width="22" height="22" rx="4"/>
+          <rect class="ol" x="36" y="10" width="22" height="22" rx="4"/>
+          <rect class="oa" x="64" y="10" width="22" height="22" rx="4"/>
+          <rect class="sl" x="92" y="10" width="22" height="22" rx="4"/>
+          <rect class="fl" x="8" y="42" width="80" height="8" rx="2"/>
+          <rect class="fl" x="8" y="56" width="56" height="6" rx="2"/>
+          <rect class="fl" x="8" y="68" width="40" height="5" rx="2"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">活的设计系统</div>
+          <div class="desc">从代码库中提取的颜色、字体和间距 Token，渲染为可直接复制的色卡。</div>
+          <div class="file"><span>05-设计系统.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d05"><div>
+        <h3>Birchline 设计系统参考</h3>
+        <p>从代码库 Token 和组件自动生成的活设计系统参考页面，包含完整色板、字体层级、间距标尺、圆角/阴影 Token 和核心组件展示。</p>
+        <p>包含：3 组共 13 个颜色色卡（主色/中性色/语义色）、6 级字体层级（Display→Caption）、8 级间距标尺（4px→64px）、4 级圆角、3 级阴影、4 个核心组件变体展示。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/05-design-system.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d05')">收起</span>
+      </div></div>
+
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d06')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="cl" x="10" y="14" width="44" height="14" rx="7"/>
+          <rect class="wh" x="10" y="34" width="44" height="14" rx="7"/>
+          <rect class="oa" x="10" y="54" width="44" height="14" rx="7"/>
+          <rect class="cl" x="66" y="14" width="34" height="11" rx="5.5"/>
+          <rect class="wh" x="66" y="32" width="34" height="11" rx="5.5"/>
+          <rect class="oa" x="66" y="50" width="34" height="11" rx="5.5"/>
+          <circle class="cl" cx="110" cy="20" r="4"/><circle class="fl" cx="110" cy="37" r="4"/><circle class="ol" cx="110" cy="56" r="4"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">组件变体矩阵</div>
+          <div class="desc">一个组件的每种尺寸、状态和意图，展现在一张表上供审查。</div>
+          <div class="file"><span>06-组件变体矩阵.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d06"><div>
+        <h3>卡片组件变体矩阵</h3>
+        <p>Birchline Card 组件的六种结构性处理方案，带实时控制面板和 JSX 代码片段预览。</p>
+        <p>六种变体：A) 平面、B) 描边、C) 阴影、D) 强调色条、E) 内嵌填充、F) 水平紧凑。每种标注了最佳使用场景，悬停时显示对应 JSX 代码。控制面板可实时调整内边距、边框样式和阴影。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/06-component-variants.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d06')">收起</span>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ========================== 原型 ========================== -->
+  <section id="prototyping">
+    <div class="sec-head"><span class="idx">04</span><h2>原型制作</h2><span class="count">2 个示例</span></div>
+    <p class="sec-intro">
+      动效和交互无法用文字描述，只能靠感受。一个带有真实缓动曲线或真实点击流程的即用即弃页面，
+      五秒钟就能告诉你一段文字永远表达不了的东西。
+    </p>
+    <div class="grid">
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d07')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="wh" x="8" y="10" width="104" height="34" rx="5"/>
+          <path class="lc" d="M16 38 C 40 38, 56 16, 104 16" fill="none"/>
+          <circle class="cl" cx="72" cy="23" r="4.5"/>
+          <line class="ln" x1="12" y1="58" x2="108" y2="58"/><circle class="cl" cx="44" cy="58" r="6"/>
+          <line class="ln" x1="12" y1="70" x2="108" y2="70"/><circle class="ol" cx="82" cy="70" r="6"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">动画沙盒</div>
+          <div class="desc">独立运行的过渡动画，带持续时间和缓动参数滑块，让你在正式集成前先调好。</div>
+          <div class="file"><span>07-动画沙盒.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d07"><div>
+        <h3>任务完成微交互动画</h3>
+        <p>完整的任务完成交互动画原型：点击任务行，圆环填充→勾号绘制→文字划线→彩纸爆发→行折叠，五个阶段一气呵成。</p>
+        <p>包含：可交互的任务行（点击切换完成/未完成）、4 种缓动曲线选择（线性/缓出/弹跳）、动画时间线可视化（5 个关键帧）、可直接复制的 CSS 代码。全部纯 CSS 动画，无 JS 动画库。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/07-prototype-animation.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d07')">收起</span>
+      </div></div>
+
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d08')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="wh" x="6" y="22" width="28" height="36" rx="4"/>
+          <rect class="oa" x="46" y="22" width="28" height="36" rx="4"/>
+          <rect class="wh" x="86" y="22" width="28" height="36" rx="4"/>
+          <line class="lc" x1="34" y1="40" x2="46" y2="40"/>
+          <line class="lc" x1="74" y1="40" x2="86" y2="40"/>
+          <circle class="cl" cx="20" cy="50" r="4"/><rect class="fl" x="52" y="30" width="16" height="4" rx="2"/><rect class="ol" x="92" y="46" width="16" height="6" rx="3"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">可点击流程</div>
+          <div class="desc">四个屏幕链接在一起——足够让你感受这个交互设计是否合适。</div>
+          <div class="file"><span>08-可点击流程.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d08"><div>
+        <h3>侧边栏拖拽重排</h3>
+        <p>即用即弃的 HTML 拖拽重排原型，使用原生 HTML5 Drag & Drop API，约 40 行 JS，无外部库。</p>
+        <p>包含：6 个可拖拽的侧边栏视图项、拖拽放置指示线（吸附到最近间隔）、设计决策说明面板和 3 个待定问题。亮点：放置指示线吸附到间隙中点、拖拽项以 35% 透明度+2°倾斜保持原位、整个行都可拖拽。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/08-prototype-interaction.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d08')">收起</span>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ========================== 插画与图表 ========================== -->
+  <section id="illustrations">
+    <div class="sec-head"><span class="idx">05</span><h2>插画与图表</h2><span class="count">2 个示例</span></div>
+    <p class="sec-intro">
+      内联 SVG 给了 Agent 一支真正的笔。让它为博客文章配图或绘制流程图，
+      得到可以手动调整或直接粘贴到最终文档中的矢量图。
+    </p>
+    <div class="grid">
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d10')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <circle class="oa" cx="32" cy="40" r="24"/>
+          <circle class="cl" cx="32" cy="40" r="11"/>
+          <path class="lc" d="M68 60 L86 20 L104 60" fill="none"/>
+          <line class="ln" x1="66" y1="66" x2="106" y2="66"/>
+          <circle class="ol" cx="86" cy="20" r="5"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">SVG 插画页</div>
+          <div class="desc">为一篇博客文章配的图，内联绘制以便逐一调整和复制。</div>
+          <div class="file"><span>10-SVG插画.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d10"><div>
+        <h3>后台任务 — 页眉插画</h3>
+        <p>三张 720×320 的手绘 SVG 插画，用于文档中后台任务章节的页眉。扁平填充、固定调色板，每张可独立下载。</p>
+        <p>A) 队列——FIFO 工作队列可视化；B) 带退避的重试——指数退避时间线；C) 扇出/扇入——父任务生成 N 个子任务汇聚在完成屏障。每张配有绘制规则说明。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/10-svg-illustrations.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d10')">收起</span>
+      </div></div>
+
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d13')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="wh" x="10" y="10" width="30" height="16" rx="4"/>
+          <path class="oa" d="M60 34 L80 46 L60 58 L40 46 Z"/>
+          <rect class="wh" x="82" y="10" width="30" height="16" rx="4"/>
+          <rect class="cl" x="82" y="56" width="30" height="16" rx="4"/>
+          <line class="ln" x1="25" y1="26" x2="25" y2="46"/><line class="ln" x1="25" y1="46" x2="40" y2="46"/>
+          <line class="lc" x1="80" y1="46" x2="97" y2="46"/><line class="lc" x1="97" y1="46" x2="97" y2="56"/>
+          <line class="ln" x1="60" y1="34" x2="60" y2="22"/><line class="ln" x1="60" y1="22" x2="82" y2="22"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">带注释的流程图</div>
+          <div class="desc">部署流水线画成真正的流程图——点击任一步骤查看运行详情、耗时和失败路径。</div>
+          <div class="file"><span>13-流程图.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d13"><div>
+        <h3>部署流水线流程图</h3>
+        <p>从 <code>git push main</code> 到部署完成的完整流程图，使用内联 SVG + 交互式点击面板。</p>
+        <p>共 10 个节点：git push → CI 检查 → 测试（3 分片）→ 测试通过？→ 构建镜像 → Argo 金丝雀 5% → SLO 达标？→ 逐步发布 25→50→100% → 生产冒烟测试 → 部署完成。包含失败路径（状态通知和自动回滚）。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/13-flowchart-diagram.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d13')">收起</span>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ========================== 幻灯片 ========================== -->
+  <section id="decks">
+    <div class="sec-head"><span class="idx">06</span><h2>幻灯片</h2><span class="count">1 个示例</span></div>
+    <p class="sec-intro">
+      几个 <code>&lt;section&gt;</code> 标签加二十行 JavaScript 就是一个幻灯片。
+      让 Agent 读一个 Slack 线程或设计文档，就能得到一个可以在会议上用方向键翻页的东西——
+      不需要 Keynote，不需要导出步骤。
+    </p>
+    <div class="grid">
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d09')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="oa" x="8" y="18" width="70" height="44" rx="5"/>
+          <rect class="wh" x="22" y="12" width="76" height="50" rx="5"/>
+          <rect class="cl" x="32" y="24" width="36" height="7" rx="3"/>
+          <rect class="fl" x="32" y="36" width="52" height="4" rx="2"/><rect class="fl" x="32" y="44" width="44" height="4" rx="2"/>
+          <circle class="fl" cx="50" cy="70" r="3"/><circle class="cl" cx="60" cy="70" r="3"/><circle class="fl" cx="70" cy="70" r="3"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">方向键翻页幻灯片</div>
+          <div class="desc">一份简短演示文稿，单一 HTML 文件。左右方向键导航，无需构建步骤。</div>
+          <div class="file"><span>09-幻灯片.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d09"><div>
+        <h3>平台工程团队周报幻灯片</h3>
+        <p>完整的 6 页幻灯片，使用 CSS scroll-snap 实现，左右方向键或空格键翻页。包含页面计数器、深色/浅色交替背景。</p>
+        <p>6 页：1) 标题页、2) 本周交付（3 项）、3) 进行中（2 项带进度条）、4) 指标（API 延迟+错误率）、5) 待定决策、6) 下周安排。每页都包含真实数据和设计细节。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/09-slide-deck.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d09')">收起</span>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ========================== 研究与学习 ========================== -->
+  <section id="research">
+    <div class="sec-head"><span class="idx">07</span><h2>研究与学习</h2><span class="count">2 个示例</span></div>
+    <p class="sec-intro">
+      带有可折叠章节、标签页代码示例和边栏词汇表的解释页面，
+      与同样内容线性堆叠的文档阅读体验截然不同。Agent 可以构建让新主题变得可导航的学习框架。
+    </p>
+    <div class="grid">
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d14')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="cl" x="8" y="8" width="104" height="20" rx="4" opacity=".35"/>
+          <rect class="fl" x="14" y="15" width="60" height="6" rx="3"/>
+          <rect class="wh" x="8" y="34" width="104" height="14" rx="4"/>
+          <rect class="wh" x="8" y="52" width="104" height="14" rx="4"/>
+          <path class="ln" d="M16 39 l4 4 l-4 4"/><rect class="fl" x="28" y="38" width="46" height="5" rx="2.5"/>
+          <path class="ln" d="M16 57 l4 4 l-4 4"/><rect class="fl" x="28" y="56" width="38" height="5" rx="2.5"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">特性工作原理</div>
+          <div class="desc">"解释这个代码库中的限流机制"—TL;DR 框、可折叠的请求路径步骤、标签页配置片段和 FAQ。</div>
+          <div class="file"><span>14-特性解释器.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d14"><div>
+        <h3>限流机制工作原理</h3>
+        <p>深入解释 Birchline API 中的限流机制：每个请求通过 rateLimit() 中间件，从 Redis 获取令牌桶，消费一个令牌或返回 429。</p>
+        <p>包含：侧边导航、4 步请求路径分解（可折叠，每步标注文件位置）、3 个配置示例（带标签页切换）、注意事项、FAQ。全部仅 ~40 行中间件代码，p50 增加约 0.4ms。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/14-research-feature-explainer.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d14')">收起</span>
+      </div></div>
+
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d15')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <circle class="st" cx="42" cy="40" r="26"/>
+          <circle class="cl" cx="42" cy="14" r="5"/><circle class="ol" cx="68" cy="40" r="5"/>
+          <circle class="fl" cx="42" cy="66" r="5"/><circle class="fl" cx="16" cy="40" r="5"/>
+          <rect class="fl" x="82" y="20" width="30" height="5" rx="2.5"/><rect class="fl" x="82" y="32" width="24" height="5" rx="2.5"/>
+          <rect class="fl" x="82" y="44" width="28" height="5" rx="2.5"/><rect class="fl" x="82" y="56" width="20" height="5" rx="2.5"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">概念解释器</div>
+          <div class="desc">带实时交互环的一致性哈希教学工具——可增删节点，对比表格，悬停链接的词汇表。</div>
+          <div class="file"><span>15-概念解释器.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d15"><div>
+        <h3>一致性哈希交互式解释器</h3>
+        <p>在环形图上直观演示一致性哈希的工作原理。可调整节点数和键数，增删节点，实时观察键的重新分配。</p>
+        <ul>
+          <li>交互式环形可视化：节点数 2-8 可调，键数 10-60 可调</li>
+          <li>实时统计：上次变更移动的键数（数量和百分比）</li>
+          <li>对比表格：hash mod N 与一致性哈希 4 维对比</li>
+          <li>侧边词汇表：5 个术语，悬停联动高亮</li>
+        </ul>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/15-research-concept-explainer.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d15')">收起</span>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ========================== 报告 ========================== -->
+  <section id="reports">
+    <div class="sec-head"><span class="idx">08</span><h2>报告</h2><span class="count">2 个示例</span></div>
+    <p class="sec-intro">
+      周期性文档——状态更新、事后复盘——最受益于结构和色彩的加持。
+      一个小图表和彩色时间线能把人们只会扫一眼的内容变成他们会实际阅读的东西。
+    </p>
+    <div class="grid">
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d11')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="fl" x="8" y="10" width="54" height="6" rx="3"/>
+          <rect class="ol" x="8" y="24" width="36" height="8" rx="3" opacity=".6"/>
+          <rect class="oa" x="8" y="38" width="28" height="8" rx="3"/>
+          <rect class="cl" x="8" y="52" width="20" height="8" rx="3" opacity=".6"/>
+          <rect class="wh" x="72" y="16" width="40" height="48" rx="5"/>
+          <rect class="ol" x="80" y="44" width="6" height="14"/>
+          <rect class="cl" x="90" y="34" width="6" height="24"/>
+          <rect class="fl" x="100" y="50" width="6" height="8"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">周度状态报告</div>
+          <div class="desc">什么已交付、什么延期了，加上一个小图表——为周一早晨快速浏览而格式化。</div>
+          <div class="file"><span>11-状态报告.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d11"><div>
+        <h3>工程状态—第 11 周</h3>
+        <p>自动生成的工程团队周报，包含概要统计、亮点、已合并 PR 列表、速度图表和遗留事项。</p>
+        <p>包含：4 格指标卡片（14 PR 合并/6 次部署/1 次事故/3 个修复）、3 条亮点、8 条 PR 表格、7 天柱状图、3 项遗留事项。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/11-status-report.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d11')">收起</span>
+      </div></div>
+
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d12')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <line class="ln" x1="18" y1="12" x2="18" y2="68"/>
+          <circle class="fl" cx="18" cy="16" r="5"/><circle class="cl" cx="18" cy="34" r="5"/>
+          <circle class="cl" cx="18" cy="50" r="5"/><circle class="ol" cx="18" cy="66" r="5"/>
+          <rect class="fl" x="32" y="13" width="40" height="5" rx="2.5"/>
+          <rect class="fl" x="32" y="31" width="56" height="5" rx="2.5"/>
+          <rect class="fl" x="32" y="47" width="48" height="5" rx="2.5"/>
+          <rect class="fl" x="32" y="63" width="36" height="5" rx="2.5"/>
+          <rect class="oa" x="94" y="26" width="20" height="30" rx="4"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">事故时间线</div>
+          <div class="desc">一份事后复盘，包含逐分钟时间线、日志摘录和后续行动清单。</div>
+          <div class="file"><span>12-事故报告.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d12"><div>
+        <h3>INC-2025-0412 — 任务同步 502 错误</h3>
+        <p>SEV-2 级别事故完整复盘：配置错误导致连接池限制从 64 降至 8，约 21% 请求在 47 分钟内返回 502。</p>
+        <p>包含：TL;DR 摘要、7 步时间线、根因分析（含错误代码 diff）、影响统计（约 41,200 次失败、约 2,300 个工作区）、4 项行动项（含负责人和截止日期，可勾选）。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/12-incident-report.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d12')">收起</span>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ========================== 自定义编辑界面 ========================== -->
+  <section id="editors">
+    <div class="sec-head"><span class="idx">09</span><h2>自定义编辑界面</h2><span class="count">3 个示例</span></div>
+    <p class="sec-intro">
+      有时候你很难在文本框中描述你想要什么。让 Agent 为你的当前任务生成一个即用即弃的编辑器——
+      并且始终以导出按钮结尾，将你在 UI 中的操作转回可粘贴回 Agent 或提交的文本。
+      你保持在回路中；回路变得更紧密。
+    </p>
+    <div class="grid">
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d18')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="wh" x="6" y="10" width="24" height="60" rx="4"/>
+          <rect class="wh" x="34" y="10" width="24" height="60" rx="4"/>
+          <rect class="wh" x="62" y="10" width="24" height="60" rx="4"/>
+          <rect class="wh" x="90" y="10" width="24" height="60" rx="4"/>
+          <rect class="cl" x="10" y="18" width="16" height="9" rx="2"/>
+          <rect class="fl" x="10" y="31" width="16" height="9" rx="2"/>
+          <rect class="fl" x="10" y="44" width="16" height="9" rx="2"/>
+          <rect class="fl" x="38" y="18" width="16" height="9" rx="2"/>
+          <rect class="ol" x="38" y="31" width="16" height="9" rx="2"/>
+          <rect class="fl" x="66" y="18" width="16" height="9" rx="2"/>
+          <rect class="oa" x="48" y="50" width="20" height="11" rx="2"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">工单分类看板</div>
+          <div class="desc">将 30 个工单拖拽至 Now/Next/Later/Cut 四列，然后将最终排序复制为 Markdown。</div>
+          <div class="file"><span>18-工单看板.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d18"><div>
+        <h3>Cycle 14 工单分类</h3>
+        <p>24 个 Linear 工单的交互式分类看板，支持拖拽分类、标签筛选、按列统计和导出 Markdown。</p>
+        <p>功能：4 列看板（Now/Next/Later/Cut）、实时统计各列数量和估算点数、点击标签筛选、"Copy as markdown" 导出。24 个工单涵盖 bug/feat/chore/debt 四类标签。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/18-editor-triage-board.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d18')">收起</span>
+      </div></div>
+
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d19')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="wh" x="8" y="10" width="104" height="14" rx="4"/>
+          <rect class="wh" x="8" y="30" width="104" height="14" rx="4"/>
+          <rect class="wh" x="8" y="50" width="104" height="14" rx="4"/>
+          <rect class="ol" x="88" y="13" width="18" height="8" rx="4"/><circle class="wh" cx="100" cy="17" r="3"/>
+          <rect class="fl" x="88" y="33" width="18" height="8" rx="4"/><circle class="wh" cx="93" cy="37" r="3"/>
+          <rect class="cl" x="88" y="53" width="18" height="8" rx="4"/><circle class="wh" cx="100" cy="57" r="3"/>
+          <rect class="fl" x="14" y="14" width="34" height="5" rx="2.5"/>
+          <rect class="fl" x="14" y="34" width="42" height="5" rx="2.5"/>
+          <rect class="fl" x="14" y="54" width="28" height="5" rx="2.5"/>
+          <line class="lc da" x1="62" y1="24" x2="62" y2="50"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">特性标志编辑器</div>
+          <div class="desc">按领域分组的开关，前置条件未开启时显示依赖警告，以及仅复制已变更键的"复制差异"按钮。</div>
+          <div class="file"><span>19-特性标志编辑器.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d19"><div>
+        <h3>flags.production.json 编辑器</h3>
+        <p>生产环境特性标志配置的基于表单的编辑器。开关切换标志，实时显示依赖冲突警告，仅复制已变更的行。</p>
+        <p>功能：4 组 14 个特性标志、开关切换带实时光标反馈、前置依赖自动检测和警告、右侧边栏实时差异、3 个导出按钮（复制差异/复制完整 JSON/重置）。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/19-editor-feature-flags.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d19')">收起</span>
+      </div></div>
+
+      <a class="card" href="javascript:void(0)" onclick="toggleDetail('d20')">
+        <div class="thumb"><svg viewBox="0 0 120 80">
+          <rect class="wh" x="6" y="10" width="56" height="60" rx="4"/>
+          <rect class="fl" x="12" y="18" width="40" height="4" rx="2"/>
+          <rect class="cl" x="12" y="26" width="22" height="4" rx="2"/>
+          <rect class="fl" x="12" y="34" width="44" height="4" rx="2"/>
+          <rect class="ol" x="12" y="42" width="18" height="4" rx="2"/>
+          <rect class="fl" x="12" y="50" width="36" height="4" rx="2"/>
+          <rect class="oa" x="68" y="10" width="46" height="18" rx="4"/>
+          <rect class="oa" x="68" y="32" width="46" height="18" rx="4"/>
+          <rect class="oa" x="68" y="54" width="46" height="18" rx="4"/>
+        </svg></div>
+        <div class="body">
+          <div class="title">提示词调优器</div>
+          <div class="desc">左侧可编辑模板（变量槽位高亮显示），右侧三个示例输入随你的输入实时重新渲染。</div>
+          <div class="file"><span>20-提示词调优器.html</span><span class="arrow">→</span></div>
+        </div>
+      </a>
+      <div class="detail-panel" id="d20"><div>
+        <h3>客服回复提示词调优器</h3>
+        <p>交互式提示词模板编辑器：左侧编辑支持客服提示词模板（{{双大括号}}语法标记变量），右侧三个真实示例工单实时渲染填充后的完整回复。</p>
+        <p>功能：contenteditable 模板编辑区（语法高亮）、3 个示例工单（不同客户/套餐/语气）、实时字符和 Token 计数器、复制/重置按钮。三个示例覆盖免费/团队/工作室三种套餐和温暖耐心/直接道歉/轻快友好三种语气。</p>
+        <a class="orig-link" href="https://thariqs.github.io/html-effectiveness/20-editor-prompt-tuner.html" target="_blank">查看原始交互页面 →</a>
+        <span class="close-btn" onclick="toggleDetail('d20')">收起</span>
+      </div></div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="k">本页面本身也是一个单独的 <code>.html</code> 文件。</span>
+    <span>查看原始仓库 · <a href="https://thariqs.github.io/html-effectiveness/" target="_blank">thariqs.github.io/html-effectiveness</a></span>
+  </footer>
+
+</div>
+
+<script>
+  function toggleDetail(id) {
+    var panel = document.getElementById(id);
+    if (!panel) return;
+    panel.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
