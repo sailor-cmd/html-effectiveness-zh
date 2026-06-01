@@ -234,6 +234,52 @@
       padding: 14px;
     }
 
+    .visual-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 12px;
+    }
+
+    .visual-card {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .92);
+    }
+
+    .visual-card svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .visual-card h3 {
+      margin: 0 0 5px;
+      font-size: 17px;
+    }
+
+    .visual-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .svg-label {
+      font-family: var(--sans);
+      fill: var(--ink);
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .svg-small {
+      font-family: var(--sans);
+      fill: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
     .sharp-flow {
       display: grid;
       grid-template-columns: 1fr 38px 1fr 38px 1fr;
@@ -953,6 +999,7 @@
       .quick-grid,
       .budget-board,
       .food-grid,
+      .visual-grid,
       .sharp-food-board,
       .sharp-schedule,
       .menu-grid {
@@ -1001,6 +1048,7 @@
       .quick-grid,
       .budget-board,
       .food-grid,
+      .visual-grid,
       .label-grid,
       .sharp-food-board,
       .sharp-schedule,
@@ -1109,6 +1157,74 @@
           <div class="sharp-badge" aria-label="每日碘目标低于 50 微克"><span>&lt;50</span>mcg/日</div>
         </div>
         <div class="sharp-body">
+          <div class="visual-grid" aria-label="低碘饮食图文解释">
+            <article class="visual-card">
+              <svg viewBox="0 0 520 260" role="img" aria-labelledby="svg-uptake-title svg-uptake-desc">
+                <title id="svg-uptake-title">低碘后 I-131 摄取流程图</title>
+                <desc id="svg-uptake-desc">低碘饮食减少体内稳定碘，使目标组织更容易摄取 I-131，从而配合检查或治疗。</desc>
+                <rect x="8" y="8" width="504" height="244" rx="18" fill="#f7fbf8" stroke="#d9e4df"/>
+                <circle cx="85" cy="92" r="48" fill="#e4f5eb" stroke="#287a5c" stroke-width="3"/>
+                <path d="M66 94c14-32 42-34 52-10 8 20-10 46-34 43-21-2-29-18-18-33Z" fill="#ffffff" stroke="#287a5c" stroke-width="3"/>
+                <path d="M85 62v94M55 110h62" stroke="#287a5c" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+                <text x="85" y="172" text-anchor="middle" class="svg-label" font-size="18">稳定碘减少</text>
+                <text x="85" y="196" text-anchor="middle" class="svg-small" font-size="13">短期低碘饮食</text>
+
+                <path d="M150 102h62" stroke="#2f6690" stroke-width="5" stroke-linecap="round"/>
+                <path d="M212 102l-14-12v24l14-12Z" fill="#2f6690"/>
+
+                <circle cx="260" cy="92" r="48" fill="#e6f1f8" stroke="#2f6690" stroke-width="3"/>
+                <circle cx="243" cy="83" r="8" fill="#f1c84b" stroke="#17322f" stroke-width="2"/>
+                <circle cx="275" cy="78" r="8" fill="#f1c84b" stroke="#17322f" stroke-width="2"/>
+                <circle cx="266" cy="110" r="8" fill="#f1c84b" stroke="#17322f" stroke-width="2"/>
+                <path d="M240 128c14-10 28-10 42 0" stroke="#2f6690" stroke-width="3" stroke-linecap="round"/>
+                <text x="260" y="172" text-anchor="middle" class="svg-label" font-size="18">I-131 摄取</text>
+                <text x="260" y="196" text-anchor="middle" class="svg-small" font-size="13">目标组织更敏感</text>
+
+                <path d="M325 102h62" stroke="#2f6690" stroke-width="5" stroke-linecap="round"/>
+                <path d="M387 102l-14-12v24l14-12Z" fill="#2f6690"/>
+
+                <circle cx="435" cy="92" r="48" fill="#fff1d8" stroke="#b16b16" stroke-width="3"/>
+                <path d="M415 105l14 14 32-44" fill="none" stroke="#287a5c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                <text x="435" y="172" text-anchor="middle" class="svg-label" font-size="18">配合治疗</text>
+                <text x="435" y="196" text-anchor="middle" class="svg-small" font-size="13">按医嘱执行</text>
+              </svg>
+              <h3>为什么治疗前要低碘</h3>
+              <p>重点不是长期忌口，而是在治疗前短期降低体内稳定碘，让检查或治疗流程更可控。</p>
+            </article>
+
+            <article class="visual-card">
+              <svg viewBox="0 0 420 260" role="img" aria-labelledby="svg-plate-title svg-plate-desc">
+                <title id="svg-plate-title">低碘餐盘分区图</title>
+                <desc id="svg-plate-desc">餐盘优先放蔬果、主食和少量新鲜蛋白，避开海产品、奶制品、蛋黄、大豆制品和加碘盐。</desc>
+                <rect x="8" y="8" width="404" height="244" rx="18" fill="#ffffff" stroke="#d9e4df"/>
+                <circle cx="146" cy="125" r="78" fill="#f7fbf8" stroke="#17322f" stroke-width="3"/>
+                <path d="M146 47a78 78 0 0 1 67 118L146 125Z" fill="#fff1d8"/>
+                <path d="M213 165A78 78 0 0 1 78 166l68-41Z" fill="#e4f5eb"/>
+                <path d="M78 166A78 78 0 0 1 146 47v78Z" fill="#e6f1f8"/>
+                <circle cx="146" cy="125" r="24" fill="#ffffff" stroke="#d9e4df" stroke-width="2"/>
+                <text x="146" y="118" text-anchor="middle" class="svg-label" font-size="15">今天</text>
+                <text x="146" y="139" text-anchor="middle" class="svg-label" font-size="15">这样吃</text>
+                <text x="146" y="226" text-anchor="middle" class="svg-small" font-size="13">蔬果 + 主食 + 少量新鲜蛋白</text>
+
+                <rect x="260" y="54" width="110" height="30" rx="15" fill="#e4f5eb"/>
+                <circle cx="275" cy="69" r="5" fill="#287a5c"/>
+                <text x="290" y="74" class="svg-label" font-size="14">优先：蔬果</text>
+                <rect x="260" y="96" width="110" height="30" rx="15" fill="#e6f1f8"/>
+                <circle cx="275" cy="111" r="5" fill="#2f6690"/>
+                <text x="290" y="116" class="svg-label" font-size="14">主食：适量</text>
+                <rect x="260" y="138" width="110" height="30" rx="15" fill="#fff1d8"/>
+                <circle cx="275" cy="153" r="5" fill="#b16b16"/>
+                <text x="290" y="158" class="svg-label" font-size="14">蛋白：限量</text>
+                <rect x="260" y="180" width="110" height="30" rx="15" fill="#ffe7e3"/>
+                <path d="M271 149" stroke="none"/>
+                <path d="M271 190l9 9M280 190l-9 9" stroke="#b93e3d" stroke-width="3" stroke-linecap="round"/>
+                <text x="290" y="200" class="svg-label" font-size="14">避开高碘</text>
+              </svg>
+              <h3>餐盘怎么搭</h3>
+              <p>先用蔬果和简单主食兜底，再放少量新鲜肉或蛋白；看不清配料的加工食品和外食先不吃。</p>
+            </article>
+          </div>
+
           <div class="sharp-flow" aria-label="低碘饮食作用流程">
             <div class="flow-node">
               <b>1</b>
