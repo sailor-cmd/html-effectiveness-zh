@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7fbf8">
+  <meta name="description" content="低碘饮食简版打印清单：严格不吃、少量吃、可放心吃，适合手机阅读和 A4 打印。">
+  <title>低碘饮食简版打印清单</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7fbf8;
+      --paper: #ffffff;
+      --ink: #14312d;
+      --muted: #5b6f6a;
+      --line: #d7e2dd;
+      --red: #b63d39;
+      --red-soft: #fff0ed;
+      --amber: #a8620d;
+      --amber-soft: #fff3d9;
+      --green: #237758;
+      --green-soft: #e5f5eb;
+      --blue: #2f6690;
+      --shadow: 0 10px 28px rgba(20, 49, 45, .08);
+      --radius: 8px;
+      --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: var(--sans);
+      line-height: 1.62;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: var(--blue);
+      text-underline-offset: 3px;
+    }
+
+    .sheet {
+      width: min(820px, 100%);
+      margin: 0 auto;
+      padding: 20px 14px 72px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      padding: 10px 0;
+      background: rgba(247, 251, 248, .92);
+      backdrop-filter: blur(12px);
+    }
+
+    button,
+    .button {
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 20px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(30px, 8vw, 48px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 0;
+      color: #31504b;
+      font-size: 16px;
+    }
+
+    .rule-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .rule-chip {
+      min-height: 76px;
+      padding: 10px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .rule-chip strong {
+      display: block;
+      font-size: 20px;
+      line-height: 1.1;
+    }
+
+    .rule-chip span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .section {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .section h2 {
+      margin: 0;
+      padding: 14px 16px;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .no h2 {
+      color: var(--red);
+      background: var(--red-soft);
+    }
+
+    .limit h2 {
+      color: var(--amber);
+      background: var(--amber-soft);
+    }
+
+    .yes h2 {
+      color: var(--green);
+      background: var(--green-soft);
+    }
+
+    .rows {
+      display: grid;
+      gap: 0;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr);
+      gap: 12px;
+      padding: 13px 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .row:first-child {
+      border-top: 0;
+    }
+
+    .row b {
+      color: var(--ink);
+      line-height: 1.35;
+    }
+
+    .row p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .row mark {
+      padding: 1px 4px;
+      border-radius: 4px;
+      background: rgba(182, 61, 57, .1);
+      color: var(--red);
+      font-weight: 800;
+    }
+
+    .daily {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .box {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .box h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .box ul,
+    .box ol {
+      margin: 0;
+      padding-left: 21px;
+    }
+
+    .box li {
+      margin: 6px 0;
+      color: var(--muted);
+    }
+
+    .box strong {
+      color: var(--ink);
+    }
+
+    .footer {
+      margin-top: 16px;
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .footer p {
+      margin: 0 0 8px;
+    }
+
+    @media (max-width: 680px) {
+      .sheet {
+        padding-top: 10px;
+      }
+
+      .topbar {
+        justify-content: stretch;
+      }
+
+      button,
+      .button {
+        flex: 1;
+        text-align: center;
+      }
+
+      .hero {
+        padding: 18px 16px;
+      }
+
+      .rule-strip,
+      .daily {
+        grid-template-columns: 1fr;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 12mm;
+      }
+
+      html,
+      body {
+        background: #fff;
+      }
+
+      body {
+        font-size: 11.5pt;
+        line-height: 1.42;
+      }
+
+      .sheet {
+        width: 100%;
+        padding: 0;
+      }
+
+      .topbar {
+        display: none;
+      }
+
+      .hero,
+      .section,
+      .box {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+
+      h1 {
+        font-size: 25pt;
+      }
+
+      .lead,
+      .row p,
+      .box li,
+      .footer {
+        font-size: 10.2pt;
+      }
+
+      .section {
+        margin-top: 8pt;
+      }
+
+      .section h2 {
+        padding: 8pt 10pt;
+        font-size: 15pt;
+      }
+
+      .row {
+        padding: 7pt 10pt;
+        grid-template-columns: 92pt 1fr;
+      }
+
+      .daily {
+        gap: 8pt;
+        margin-top: 8pt;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <nav class="topbar" aria-label="页面操作">
+      <a class="button" href="./">详细版</a>
+      <button type="button" onclick="window.print()">打印 / 存 PDF</button>
+    </nav>
+
+    <header class="hero">
+      <h1>低碘饮食简版清单</h1>
+      <p class="lead">用于放射性碘检查或治疗前的短期准备。开始和停止日期按医生安排；不确定的配料，先按“不吃”处理。</p>
+      <div class="rule-strip" aria-label="三条总原则">
+        <div class="rule-chip">
+          <strong>不等于低盐</strong>
+          <span>盐可以用，但只用明确写着“未加碘/非加碘”的普通盐。</span>
+        </div>
+        <div class="rule-chip">
+          <strong>目标是避碘</strong>
+          <span>海、奶、蛋黄、大豆、加工食品、外食是最容易踩雷的来源。</span>
+        </div>
+        <div class="rule-chip">
+          <strong>严格看标签</strong>
+          <span>含碘、海藻胶、红色 3 号、碘酸盐面包改良剂都先放回。</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="section no" aria-labelledby="no-title">
+      <h2 id="no-title">严格不可以吃</h2>
+      <div class="rows">
+        <div class="row">
+          <b>盐和调味</b>
+          <p><mark>加碘盐</mark>、海盐、调味盐、低钠盐、复合调味粉；酱油、蚝油、鱼露、海鲜粉、含海藻配料的调味品。</p>
+        </div>
+        <div class="row">
+          <b>海产品海藻</b>
+          <p>鱼、虾、蟹、贝、海鲜汤、寿司；海带、紫菜、海苔、昆布、裙带菜、海藻钙、kelp 补剂。</p>
+        </div>
+        <div class="row">
+          <b>奶和蛋黄</b>
+          <p>牛奶、奶酪、酸奶、奶油、奶粉、乳清；蛋黄、全蛋、蛋黄酱、含蛋黄的点心和面包。</p>
+        </div>
+        <div class="row">
+          <b>大豆和豆类</b>
+          <p>豆腐、豆浆、豆皮、素肉、大豆汉堡、毛豆、黄豆制品；配料里有大豆蛋白也先不要。</p>
+        </div>
+        <div class="row">
+          <b>外食和加工</b>
+          <p>外卖、餐馆、快餐、预制菜、冷冻餐、罐头、加工肉、火腿、培根、香肠、卤味、丸子、腌肉。</p>
+        </div>
+        <div class="row">
+          <b>配料关键词</b>
+          <p>碘化物、碘酸盐、碘酸钙、碘酸钾、藻酸盐、卡拉胶、琼脂、海藻酸钠、Red Dye #3 / E127。</p>
+        </div>
+        <div class="row">
+          <b>药品补剂</b>
+          <p>含碘复合维生素、海藻/海带补剂、液体营养补充剂；药物不要自行停，先问医生或治疗团队。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section limit" aria-labelledby="limit-title">
+      <h2 id="limit-title">可以少量吃</h2>
+      <div class="rows">
+        <div class="row">
+          <b>新鲜肉类</b>
+          <p>鸡、猪、牛、羊只选新鲜、未腌制、无注水汤汁。建议每天 0 - 2 份；1 份约 85g，最多约 170g。</p>
+        </div>
+        <div class="row">
+          <b>谷物主食</b>
+          <p>米饭、白粥、燕麦、普通面条、土豆去皮、玉米。买包装食品时只选配料很短、无奶蛋豆、无碘酸盐的。</p>
+        </div>
+        <div class="row">
+          <b>无盐坚果</b>
+          <p>花生、杏仁、腰果、无盐花生酱可以少量；加盐坚果、调味坚果不吃。</p>
+        </div>
+        <div class="row">
+          <b>植物奶</b>
+          <p>燕麦奶、杏仁奶、椰奶只在配料干净时少量用；含豆浆、奶粉、卡拉胶、海藻胶的不喝。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section yes" aria-labelledby="yes-title">
+      <h2 id="yes-title">通常可以放心吃</h2>
+      <div class="rows">
+        <div class="row">
+          <b>蔬菜水果</b>
+          <p>新鲜蔬菜、水果、果汁、土豆去皮、清炒菜。做菜只用未加碘盐、植物油、醋、葱姜蒜和普通香料。</p>
+        </div>
+        <div class="row">
+          <b>蛋白和油糖</b>
+          <p>新鲜蛋白、植物油、白糖、蜂蜜、果酱、白醋、黑胡椒、辣椒、姜、蒜、葱。</p>
+        </div>
+        <div class="row">
+          <b>饮品</b>
+          <p>水、茶、黑咖啡、柠檬水、不含红色 3 号的普通饮料。不需要喝蒸馏水。</p>
+        </div>
+        <div class="row">
+          <b>最稳一餐</b>
+          <p>米饭 + 清炒蔬菜 + 少量新鲜肉或蛋白 + 水果。调味只用未加碘盐、油、醋和香料。</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="daily">
+      <section class="box" aria-labelledby="day-title">
+        <h2 id="day-title">每天照这 5 步</h2>
+        <ol>
+          <li><strong>外食归零</strong>，自己做饭最稳。</li>
+          <li><strong>标签先看盐、海、奶、蛋、豆</strong>，有一个就放回。</li>
+          <li><strong>肉类限量</strong>，当天吃肉就别再叠加高风险食品。</li>
+          <li><strong>药品补剂问医生</strong>，不要自行停药。</li>
+          <li><strong>吃错一次先记录</strong>，再问治疗团队是否需要调整。</li>
+        </ol>
+      </section>
+
+      <section class="box" aria-labelledby="shop-title">
+        <h2 id="shop-title">采购最短清单</h2>
+        <ul>
+          <li>未加碘 / 非加碘普通盐</li>
+          <li>米、燕麦、普通面条、土豆</li>
+          <li>新鲜蔬菜、水果</li>
+          <li>新鲜未腌制肉类、鸡蛋白</li>
+          <li>无盐坚果、植物油、醋、糖、蜂蜜</li>
+          <li>水、茶、黑咖啡、不加奶饮品</li>
+        </ul>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <p>提醒：低碘饮食只适合医生要求的短期准备，不建议长期执行。本文是执行清单，不能替代医生或营养师建议。</p>
+      <p>参考：American Thyroid Association Low Iodine Diet；Memorial Sloan Kettering Cancer Center Low-Iodine Diet。</p>
+      <p>版本：2026-06-01</p>
+    </footer>
+  </main>
+</body>
+</html>
